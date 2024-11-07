@@ -1,0 +1,242 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #F9F8F7;
+}
+p.double {
+    outline-style: double;
+}
+.opening-video {
+    position: fixed; /* Fix the video in the background */
+    top: 50%; /* Center the video vertically */
+    left: 50%; /* Center the video horizontally */
+    min-width: 100%; /* Full width */
+    min-height: 100%; /* Full height */
+    width: auto; /* Maintain aspect ratio */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 2; /* Send to back, but in front of overlay */
+    transform: translate(-50%, -50%); /* Center video */
+    opacity: 1; /* Start fully visible */
+    transition: opacity 1s ease-in-out; /* Fade effect */
+}
+
+.video-fade-out {
+    opacity: 0; /* Fade out effect */
+}
+
+.background-video {
+    position: fixed; /* Fix the video in the background */
+    top: 50%; /* Center the video vertically */
+    left: 50%; /* Center the video horizontally */
+    min-width: 100%; /* Full width */
+    min-height: 100%; /* Full height */
+    width: auto; /* Maintain aspect ratio */
+    height: auto; /* Maintain aspect ratio */
+    z-index: -1; /* Send to back */
+    transform: translate(-50%, -50%); /* Center video */
+}
+
+.video-overlay {
+    position: fixed; /* Fix overlay to cover entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1); /* Optional: slight tint */
+    backdrop-filter: blur(8px); /* Apply blur effect */
+    z-index: -1; /* Ensure it stays behind the content */
+}
+
+/* Main content styles */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.fade-in {
+    opacity: 0; /* Start fully transparent */
+    transition: opacity 0.25s ease-in; /* Duration of the fade-in effect */
+}
+
+.fade-in.show {
+    opacity: 1; /* Fully visible */
+}
+
+.left-side {
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.diary-image {
+    margin-left: 120px;
+    border-radius: 50px;
+    max-width: 70%;
+}
+
+.description {
+    margin-left: 120px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.right-side {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid {
+    border-radius: 10px;
+    display: grid;
+    width: 60%;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    grid-template-rows: repeat(6, 1fr); /* 6 rows */
+    gap: 50px;
+    height: 80%;
+}
+
+.text {
+    z-index: 3;
+    position: absolute; /* Position it on top of the image */
+    bottom: 5px; /* Position from the bottom */
+    left: 10px; /* Position from the left */
+    color: white; /* Text color */
+    background-color: rgba(0, 0, 0, 0.205); /* Semi-transparent background for better readability */
+    padding: 5px; /* Padding around the text */
+    border-radius: 5px; /* Rounded corners for the background */
+    transition: opacity 0.3s; /* Smooth transition */
+    opacity: 0; /* Initially hidden */
+}
+.cell {
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+}
+.thumbnail {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: opacity 0.3s ease;
+}
+.static-thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.hover-thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    opacity: 0; /* Hide GIF by default */
+}
+.cell:hover .static-thumbnail {
+    opacity: 0; /* Hide static PNG on hover */
+}
+.cell:hover .hover-thumbnail {
+    opacity: 1; /* Show GIF on hover */
+}
+
+.cell:hover .text {
+    opacity: 1; /* Show text on hover */
+}
+
+.cell img {
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s, filter 0.3s; /* Add transition for filter */
+    filter: blur(4px); /* Apply blur effect */
+}
+
+.cell:hover img {
+    transform: scale(1.3);
+    filter: blur(0); /* Remove blur effect on hover */
+    color: white;
+    background-color: rgba(21, 82, 196, 0.736);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(17, 0, 128);
+    animation: pulse 0.5s ease-in infinite;
+}
+
+.cell:hover ~ .overlay {
+    display: block; /* Show overlay on image hover */
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center; /* Center the modal content */
+    align-items: center; /* Center the modal content */
+}
+
+.modal-content {
+    border-radius: 10px;
+    position: relative;
+    margin: auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0);
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    transform: scale(0);
+    transition: transform 0.3s;
+}
+
+.modal-content.show {
+    transform: scale(1);
+    
+}
+
+.modal-image {
+    background-color: rgba(35, 134, 192, 0.574);
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+}
+.modal-images {
+    display: grid;
+    border-radius: 10px;
+    gap: 50px;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    grid-template-rows: repeat(2, 1fr); 
+    justify-content: center; /* Space the images evenly */
+    align-items: center;
+}
+.modal-video {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+}
+.modal-description {
+    text-align: center;
+    color: white;
+    background-color: rgba(35, 134, 192, 0.574);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(152, 159, 232, 0.544);
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    margin: 5px 0;
+    font-size: 20px; /* Text size */
+    width: 100%;
+}

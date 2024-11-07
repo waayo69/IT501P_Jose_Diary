@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diary Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <video autoplay muted loop class="background-video">
+        <source src="vid.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    <div class="container">
+            <div class="left-side">
+                <img src="rico.png" alt="Diary Image" class="diary-image">
+                <p class="description">Diary about Asian College of Technologie's 36th's Founder's day</p>
+            </div>
+            <div class="right-side">
+                <div class="grid">
+                    <div class="cell" onclick="openModal('mass.jpg','36𝙩𝙝 𝙔𝙚𝙖𝙧𝙨 𝙤𝙛 𝙐𝙣𝙨𝙩𝙤𝙥𝙥𝙖𝙗𝙡𝙚 𝘼𝙘𝙩𝙞𝙤𝙣 🎉🔥 Day 1 - Opening Celebration')">
+                        <img src="mass.jpg" alt="Thumbnail 1">
+                        <div class="text">Day 1</div>
+                    </div>
+                    <div class="cell" onclick="openVideoModal('la paroza.mp4','La Paroza 2024! CCS 💃🕺')">
+                        <img src="rico.png" alt="Thumbnail 2" class="thumbnail static-thumbnail">
+                        <img src="rico1.gif" alt="GIF Thumbnail 2" class="thumbnail hover-thumbnail">
+                        <div class="text">AMBOT 2</div>
+                    </div>
+                    <div class="cell" onclick="openModal('rico.png','RICO')">
+                        <img src="rico.png" alt="Thumbnail 3">
+                        <div class="text">AMBOT 3</div>
+                    </div>
+                    <div class="cell" onclick="openVideoModal('bebot.mp4','Opening Celebration & ACT Jingle Competition with our Savior Bebot')">
+                        <img src="bebot.png" alt="Thumbnail 2" class="thumbnail static-thumbnail">
+                        <img src="bebot.gif" alt="GIF Thumbnail 2" class="thumbnail hover-thumbnail">
+                        <div class="text">AMBOT 4</div>
+                    </div>
+                    <div class="cell" onclick="openModal('rico.png','RICO')">
+                        <img src="rico.png" alt="Thumbnail 5">
+                        <div class="text">AMBOT 5</div>
+                    </div>
+                    <div class="cell" onclick="openVideoModal('highlights.mp4','𝟯𝟲𝘁𝗵 𝗙𝗼𝘂𝗻𝗱𝗮𝘁𝗶𝗼𝗻 𝗔𝗻𝗻𝗶𝘃𝗲𝗿𝘀𝗮𝗿𝘆 𝗢𝗽𝗲𝗻𝗶𝗻𝗴 𝗖𝗲𝗹𝗲𝗯𝗿𝗮𝘁𝗶𝗼𝗻 𝗛𝗶𝗴𝗵𝗹𝗶𝗴𝗵𝘁𝘀')">
+                        <img src="highlights.png" alt="Thumbnail 2" class="thumbnail static-thumbnail">
+                        <img src="highlights.gif" alt="GIF Thumbnail 2" class="thumbnail hover-thumbnail">
+                        <div class="text">AMBOT 6</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation();">
+            <p class="modal-description"></p>
+        </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
